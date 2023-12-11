@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import './Dashboard.css'; // Import your CSS file for dashboard styling
+import './Dashboard.css'; 
 import BarGraph from '../Graphs/BarGraph';
 import PieChartComponent from '../Graphs/PieChart';
 import ThreeDPieChart from '../Graphs/ThreeDPieChart';
@@ -9,7 +9,7 @@ import AreaGraph from '../Graphs/AreaGraph';
 const Dashboard = () => {
   const location = useLocation();
   const username = location.state ? location.state.username : null;
-  //const [showButtons, setShowButtons] = useState(true);
+  
 
   const [showExpenditure, setShowExpenditure] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState('');
@@ -17,19 +17,19 @@ const Dashboard = () => {
 
   const [showGraphs, setShowGraphs] = useState(false);
 
-  const [showFields, setShowFields] = useState(false); // State to control the display of fields
+  const [showFields, setShowFields] = useState(false); 
   const [formData, setFormData] = useState({
     month: '',
     item: '',
     budget: '',
-  }); // State to manage form data
+  }); 
 
-  const [showCapacityFields, setShowCapacityFields] = useState(false); // State to control the display of capacity fields
+  const [showCapacityFields, setShowCapacityFields] = useState(false); 
   const [capacityData, setCapacityData] = useState({
     month: '',
     item: '',
     capacity: '',
-  }); // State to manage capacity form data
+  }); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,11 +81,11 @@ const Dashboard = () => {
 
   const handleSubmit = () => {
     const dataToSend = {
-      username: username, // Assuming `username` is retrieved from the component's state
+      username: username, 
       ...formData,
     };
 
-    fetch('http://localhost:5000/addBudget', {
+    fetch('http://143.198.14.75:5000/addBudget', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -99,14 +99,14 @@ const Dashboard = () => {
         return response.json();
       })
       .then((data) => {
-        // Handle success response
+        
         console.log('Data sent successfully:', data);
-        setShowFields(false); // Hide form fields after successful submission
+        setShowFields(false); 
         alert('New expense successfully added! Remember: Expenses, like regrets, accumulate when ignored.'); // Show success message (you can replace this with a modal)
-        setFormData({ month: '', item: '', budget: '' }); // Reset form fields
+        setFormData({ month: '', item: '', budget: '' }); 
       })
       .catch((error) => {
-        // Handle errors here
+       
         console.error('Error sending data:', error);
       });
   };
@@ -121,11 +121,11 @@ const Dashboard = () => {
 
   const handleCapacitySubmit = () => {
     const dataToSend = {
-      username: username, // Assuming `username` is retrieved from the component's state
+      username: username, 
       ...capacityData,
     };
     console.log(dataToSend);
-    fetch('http://localhost:5000/addCapacity', {
+    fetch('http://143.198.14.75:5000/addCapacity', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -139,14 +139,14 @@ const Dashboard = () => {
         return response.json();
       })
       .then((data) => {
-        // Handle success response
+        
         console.log('Capacity data sent successfully:', data);
-        setShowCapacityFields(false); // Hide capacity fields after successful submission
+        setShowCapacityFields(false); 
         alert('Capacity added successfully!');
-        setCapacityData({ month: '', item: '', capacity: '' }); // Reset capacity form fields
+        setCapacityData({ month: '', item: '', capacity: '' }); 
       })
       .catch((error) => {
-        // Handle errors here
+        
         console.error('Error sending capacity data:', error);
       });
   };
@@ -155,7 +155,7 @@ const Dashboard = () => {
 
   const handleShowExpenditure = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/getBudgetsByMonth?username=${username}&month=${selectedMonth}`);
+      const response = await fetch(`http://143.198.14.75:5000/getBudgetsByMonth?username=${username}&month=${selectedMonth}`);
       if (!response.ok) {
         throw new Error('Network response was not ok.');
       }

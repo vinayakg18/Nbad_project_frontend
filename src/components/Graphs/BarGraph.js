@@ -11,7 +11,7 @@ const BarGraph = ({ username, selectedMonth }) => {
 
   const fetchMonthlyData = async (username, selectedMonth) => {
     try {
-      const response = await fetch(`http://localhost:5000/getBudgetsByMonth?username=${username}&month=${selectedMonth}`);
+      const response = await fetch(`http://143.198.14.75:5000/getBudgetsByMonth?username=${username}&month=${selectedMonth}`);
       if (!response.ok) {
         throw new Error('Network response was not ok.');
       }
